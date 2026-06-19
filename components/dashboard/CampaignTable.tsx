@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowUpDown, ArrowUp, ArrowDown, ChevronDown, ChevronRight } from "lucide-react"
+import { ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react"
 import {
   Table,
   TableBody,
@@ -10,7 +10,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { AdDetails } from "@/components/dashboard/AdDetails"
 import type { CampaignInsight } from "@/lib/meta/types"
 
 type SortKey = "name" | "spend" | "impressions" | "ctr" | "visitas" | "carritos" | "pagos" | "purchases" | "cpa" | "valorCompras" | "roas"
@@ -62,7 +61,6 @@ interface CampaignTableProps {
 
 export function CampaignTable({ campaigns, loading }: CampaignTableProps) {
   const [sort, setSort] = useState<{ key: SortKey; dir: SortDir }>({ key: "spend", dir: "desc" })
-  const [expandedId, setExpandedId] = useState<string | null>(null)
 
   function toggle(key: SortKey) {
     setSort((prev) => prev.key === key ? { key, dir: prev.dir === "asc" ? "desc" : "asc" } : { key, dir: "desc" })
@@ -104,7 +102,6 @@ export function CampaignTable({ campaigns, loading }: CampaignTableProps) {
       <Table className="min-w-[960px]">
         <TableHeader>
           <TableRow className="hover:bg-transparent border-b">
-            <TableHead className="w-6 px-2" />
             <TableHead className="w-[22%] min-w-[180px]">
               <SortBtn col="name" active={sort.key === "name"} dir={sort.dir} onClick={() => toggle("name")}>
                 Campaña
@@ -121,21 +118,12 @@ export function CampaignTable({ campaigns, loading }: CampaignTableProps) {
         </TableHeader>
         <TableBody>
           {sorted.map((c) => {
-            const isExpanded = expandedId === c.id
             const semaforo = cpaSemaforo(c.cpa)
             return (
-              <>
                 <TableRow
                   key={c.id}
-                  className="hover:bg-gray-50/60 cursor-pointer"
-                  onClick={() => setExpandedId(isExpanded ? null : c.id)}
+                  className="hover:bg-gray-50/60"
                 >
-                  <TableCell className="px-2">
-                    {isExpanded
-                      ? <ChevronDown size={14} className="text-muted-foreground" />
-                      : <ChevronRight size={14} className="text-muted-foreground" />
-                    }
-                  </TableCell>
                   <TableCell>
                     <p className="font-medium text-sm leading-tight">{c.name}</p>
                   </TableCell>
@@ -182,14 +170,6 @@ export function CampaignTable({ campaigns, loading }: CampaignTableProps) {
                     }
                   </TableCell>
                 </TableRow>
-                {isExpanded && (
-                  <TableRow key={`${c.id}-ads`} className="hover:bg-transparent">
-                    <TableCell colSpan={12} className="p-0">
-                      <AdDetails campaignId={c.id} />
-                    </TableCell>
-                  </TableRow>
-                )}
-              </>
             )
           })}
         </TableBody>
