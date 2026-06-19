@@ -1,7 +1,6 @@
 "use client"
 
-import Image from "next/image"
-import { type AdResult } from "@/lib/data/adsJunio"
+import type { AdResultVK } from "@/lib/data/adsJunioVitaKids"
 
 const fmtUSD = (n: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2 }).format(n)
@@ -18,25 +17,21 @@ function Metric({ label, value, highlight }: { label: string; value: string; hig
   )
 }
 
-export function TopAds({ ads }: { ads: AdResult[] }) {
+export function TopAds({ ads }: { ads: AdResultVK[] }) {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
       {ads.map((ad) => (
         <div
-          key={ad.image}
+          key={ad.name}
           className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden flex flex-col"
         >
-          {/* Imagen del ad — proporción natural sin recorte */}
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={ad.image}
             alt={ad.name}
-            width={0}
-            height={0}
-            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 16vw"
             className="w-full h-auto"
           />
 
-          {/* Métricas */}
           <div className="p-3 flex flex-col gap-2.5 border-t border-gray-50">
             <p className="text-[11px] font-semibold text-gray-700 leading-tight line-clamp-2">
               {ad.name}
@@ -48,7 +43,7 @@ export function TopAds({ ads }: { ads: AdResult[] }) {
               <Metric label="Valor"   value={fmtUSD(ad.valor)} />
             </div>
             <div className="pt-1 border-t border-gray-50">
-              <Metric label="ROAS" value={`${ad.roas.toFixed(2)}x`} highlight />
+              <Metric label="ROAS" value={ad.roas > 0 ? `${ad.roas.toFixed(2)}x` : "—"} highlight={ad.roas > 0} />
             </div>
           </div>
         </div>

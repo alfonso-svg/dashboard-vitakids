@@ -41,7 +41,7 @@ export function ExportButton() {
       pdf.setTextColor(255, 255, 255)
       pdf.setFontSize(13)
       pdf.setFont("helvetica", "bold")
-      pdf.text("Kriza", margin, 10)
+      pdf.text("Vita Kids", margin, 10)
 
       // Subtítulo
       pdf.setFontSize(8)
@@ -63,7 +63,7 @@ export function ExportButton() {
 
       pdf.addImage(imgData, "JPEG", margin, 28, contentW, Math.min(contentH, maxH))
 
-      pdf.save(`kriza-${new Date().toISOString().slice(0, 10)}.pdf`)
+      pdf.save(`vitakids-${new Date().toISOString().slice(0, 10)}.pdf`)
     } finally {
       setLoading(false)
     }

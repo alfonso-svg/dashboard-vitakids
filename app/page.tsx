@@ -14,7 +14,7 @@ import { ConversionsChart } from "@/components/charts/ConversionsChart"
 import { DateRangePicker, type DateRangeValue } from "@/components/dashboard/DateRangePicker"
 import { ExportButton } from "@/components/dashboard/ExportButton"
 import { CsvUpload, CSV_STORAGE_KEY } from "@/components/dashboard/CsvUpload"
-import { dailyData, campaigns as staticCampaigns } from "@/lib/data/kriza"
+import { dailyData, campaigns as staticCampaigns } from "@/lib/data/vita-kids"
 import { aggregateCsvRows, csvDateRange, getAccountMonthlyTotals, mesFromISO, parseCsvData, type CsvMonthRow, type MonthlyAccountTotal } from "@/lib/data/csvParser"
 import { parseTablaNegocio, type TablaNegocioRow } from "@/lib/data/tablaNegocioParser"
 import { TopAds } from "@/components/dashboard/TopAds"
@@ -22,7 +22,7 @@ import { TablaNegocio } from "@/components/dashboard/TablaNegocio"
 import { ComprasRoasChart } from "@/components/charts/ComprasRoasChart"
 import { CarritosComprasChart } from "@/components/charts/CarritosComprasChart"
 import { ConversionWebChart } from "@/components/charts/ConversionWebChart"
-import { adsJunio } from "@/lib/data/adsJunio"
+import { adsJunioVK } from "@/lib/data/adsJunioVitaKids"
 import type { DailyInsight } from "@/lib/meta/types"
 
 // ── Formatters ───────────────────────────────────────────────────────────────
@@ -127,7 +127,7 @@ export default function DashboardPage() {
 
   async function fetchPublicCsv() {
     try {
-      const r = await fetch('/Data%20Kriza/MetaNumbers%20KRIZA%20-%20KRIZA%20-%20NO%20TOCAR.csv')
+      const r = await fetch('/Vita%20Kids%20data/Vita%20Kids%20-%20Claude%20-%20Data%20Hist%C3%B3rica.csv')
       const text = await r.text()
       const rows = parseCsvData(text)
       if (rows.length) setCsvRows(rows)
@@ -148,7 +148,7 @@ export default function DashboardPage() {
       fetchPublicCsv()
     }
 
-    fetch('/Data%20Kriza/Tabla%20Negocio%20Kriza%20-%20Hoja%201.csv')
+    fetch('/Vita%20Kids%20data/Vita%20Kids%20-%20Claude%20-%20Ventas%20Negocio.csv')
       .then(r => r.text())
       .then(text => {
         const rows = parseTablaNegocio(text)
@@ -318,7 +318,7 @@ export default function DashboardPage() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/Logos/kriza blanco.png" alt="Kriza" className="h-8 w-auto object-contain" />
+            <img src="/Logo/NUEVO LOGO VK.jpg" alt="Vita Kids" className="h-8 w-auto object-contain" />
             <span
               className="text-[11px] font-semibold px-2 py-0.5 rounded-full"
               style={{ backgroundColor: "#8B5CF6", color: "#fff" }}
@@ -326,8 +326,7 @@ export default function DashboardPage() {
               Ecommerce · Shopify
             </span>
           </div>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/Logos/Logo STP.png" alt="STP Agency" className="h-10 w-auto object-contain" />
+          <span className="text-white/50 text-sm font-semibold tracking-wide">STP Agency</span>
         </div>
       </header>
       <div className="h-1" style={{ backgroundColor: "#8B5CF6" }} />
@@ -526,7 +525,7 @@ export default function DashboardPage() {
           <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-3">
             Mejores ads · Junio 2026
           </p>
-          <TopAds ads={adsJunio} />
+          <TopAds ads={adsJunioVK} />
         </div>
 
         {/* Histórico mensual */}

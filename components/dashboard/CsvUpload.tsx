@@ -4,7 +4,7 @@ import { useRef, useState } from "react"
 import { Upload, Check, X } from "lucide-react"
 import { parseCsvData, type CsvMonthRow } from "@/lib/data/csvParser"
 
-export const CSV_STORAGE_KEY = "kriza-csv-data"
+export const CSV_STORAGE_KEY = "vitakids-csv-data"
 
 interface Props {
   onDataLoaded: (rows: CsvMonthRow[] | null) => void

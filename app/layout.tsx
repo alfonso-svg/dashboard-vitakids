@@ -14,7 +14,7 @@ const robotoMono = Roboto_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kriza — Dashboard",
+  title: "Vita Kids — Dashboard",
   description: "Dashboard de Meta Ads — STP Agency",
 };
 
