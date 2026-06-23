@@ -90,6 +90,9 @@ export const dailyData: DailyInsight[] = [
   { date:"2026-06-17", spend: 29.63, impressions: 31307, clicks:  988, ctr:3.16, purchases: 9, roas:10.19, valorConversiones: 301.94, visitas:  445, carritos: 49, pagos: 24 },
   { date:"2026-06-18", spend: 31.83, impressions: 36165, clicks: 1128, ctr:3.12, purchases:14, roas:11.12, valorConversiones: 353.95, visitas:  508, carritos: 56, pagos: 28 },
   { date:"2026-06-19", spend: 11.47, impressions: 12743, clicks:  374, ctr:2.93, purchases: 2, roas: 4.39, valorConversiones:  50.35, visitas:  168, carritos: 18, pagos:  9 },
+  { date:"2026-06-20", spend: 40.09, impressions: 44952, clicks: 1198, ctr:2.67, purchases: 4, roas: 3.19, valorConversiones: 127.89, visitas:  539, carritos: 60, pagos: 30 },
+  { date:"2026-06-21", spend: 49.74, impressions: 58002, clicks: 1627, ctr:2.81, purchases: 5, roas: 2.71, valorConversiones: 134.80, visitas:  732, carritos: 81, pagos: 41 },
+  { date:"2026-06-22", spend: 40.74, impressions: 35400, clicks: 1191, ctr:3.36, purchases: 7, roas: 4.20, valorConversiones: 171.11, visitas:  536, carritos: 60, pagos: 30 },
 ]
 
 // Campañas junio 2026 · Meta API
