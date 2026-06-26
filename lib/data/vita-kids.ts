@@ -89,10 +89,13 @@ export const dailyData: DailyInsight[] = [
   { date:"2026-06-16", spend: 28.85, impressions: 17935, clicks:  842, ctr:4.69, purchases:22, roas:17.72, valorConversiones: 511.42, visitas:  379, carritos: 42, pagos: 21 },
   { date:"2026-06-17", spend: 29.63, impressions: 31307, clicks:  988, ctr:3.16, purchases: 9, roas:10.19, valorConversiones: 301.94, visitas:  445, carritos: 49, pagos: 24 },
   { date:"2026-06-18", spend: 31.83, impressions: 36165, clicks: 1128, ctr:3.12, purchases:14, roas:11.12, valorConversiones: 353.95, visitas:  508, carritos: 56, pagos: 28 },
-  { date:"2026-06-19", spend: 11.47, impressions: 12743, clicks:  374, ctr:2.93, purchases: 2, roas: 4.39, valorConversiones:  50.35, visitas:  168, carritos: 18, pagos:  9 },
-  { date:"2026-06-20", spend: 40.09, impressions: 44952, clicks: 1198, ctr:2.67, purchases: 4, roas: 3.19, valorConversiones: 127.89, visitas:  539, carritos: 60, pagos: 30 },
-  { date:"2026-06-21", spend: 49.74, impressions: 58002, clicks: 1627, ctr:2.81, purchases: 5, roas: 2.71, valorConversiones: 134.80, visitas:  732, carritos: 81, pagos: 41 },
-  { date:"2026-06-22", spend: 40.74, impressions: 35400, clicks: 1191, ctr:3.36, purchases: 7, roas: 4.20, valorConversiones: 171.11, visitas:  536, carritos: 60, pagos: 30 },
+  { date:"2026-06-19", spend: 30.03, impressions: 36359, clicks:  943, ctr:2.59, purchases: 4, roas: 2.67, valorConversiones:  80.18, visitas:  424, carritos: 47, pagos: 23 },
+  { date:"2026-06-20", spend: 40.09, impressions: 44952, clicks: 1198, ctr:2.67, purchases: 4, roas: 3.19, valorConversiones: 127.89, visitas:  539, carritos: 59, pagos: 30 },
+  { date:"2026-06-21", spend: 49.74, impressions: 58002, clicks: 1627, ctr:2.81, purchases: 5, roas: 2.71, valorConversiones: 134.80, visitas:  732, carritos: 81, pagos: 40 },
+  { date:"2026-06-22", spend: 40.76, impressions: 35449, clicks: 1194, ctr:3.37, purchases: 7, roas: 4.20, valorConversiones: 171.19, visitas:  537, carritos: 59, pagos: 30 },
+  { date:"2026-06-23", spend: 39.99, impressions: 26117, clicks:  812, ctr:3.11, purchases:10, roas: 6.33, valorConversiones: 253.14, visitas:  365, carritos: 40, pagos: 20 },
+  { date:"2026-06-24", spend: 37.65, impressions: 23978, clicks:  679, ctr:2.83, purchases: 7, roas: 4.93, valorConversiones: 185.61, visitas:  306, carritos: 34, pagos: 17 },
+  { date:"2026-06-25", spend: 37.90, impressions: 42568, clicks:  764, ctr:1.79, purchases: 6, roas: 4.14, valorConversiones: 156.91, visitas:  344, carritos: 38, pagos: 19 },
 ]
 
 // Campañas junio 2026 · Meta API
