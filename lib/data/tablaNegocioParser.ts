@@ -26,7 +26,7 @@ function parseUSD(s: string): number {
   if (!s) return 0
   const trimmed = s.trim().replace(/"/g, "")
   const negative = trimmed.startsWith("-")
-  const clean = trimmed.replace(/^-/, "").replace(/[$,\s]/g, "")
+  const clean = trimmed.replace(/^-/, "").replace(/[$,.\s]/g, "")
   const val = parseFloat(clean) || 0
   return negative ? -val : val
 }
