@@ -1,6 +1,6 @@
 "use client"
 
-import type { AdResultVK } from "@/lib/data/adsJunioVitaKids"
+import type { AdResultVK } from "@/lib/data/adsJulioVitaKids"
 
 const fmtUSD = (n: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2 }).format(n)
