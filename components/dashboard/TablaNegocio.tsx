@@ -42,11 +42,11 @@ export function TablaNegocio({ rows }: Props) {
               <th className="text-left   px-3 py-2.5 font-semibold text-gray-500 whitespace-nowrap">Mes</th>
               <th className="text-right  px-3 py-2.5 font-semibold text-gray-500 whitespace-nowrap">Conv. Meta</th>
               <th className="text-right  px-3 py-2.5 font-semibold text-gray-500 whitespace-nowrap">Conv. Reales</th>
-              <th className="text-center px-3 py-2.5 font-semibold text-gray-500 whitespace-nowrap">Ratio conv.</th>
+              <th className="text-center px-3 py-2.5 font-semibold text-gray-500 whitespace-nowrap">% Compras perdidas</th>
               <th className="text-right  px-3 py-2.5 font-semibold text-gray-500 whitespace-nowrap">Ing. Meta</th>
               <th className="text-right  px-3 py-2.5 font-semibold text-gray-500 whitespace-nowrap">Ing. Reales</th>
-              <th className="text-right  px-3 py-2.5 font-semibold text-gray-500 whitespace-nowrap">Ratio ing.</th>
-              <th className="text-right  px-3 py-2.5 font-semibold text-gray-500 whitespace-nowrap">Conv. perdidas</th>
+              <th className="text-right  px-3 py-2.5 font-semibold text-gray-500 whitespace-nowrap">% Ingresos reales</th>
+              <th className="text-right  px-3 py-2.5 font-semibold text-gray-500 whitespace-nowrap">Compras perdidas</th>
             </tr>
           </thead>
           <tbody>
@@ -64,7 +64,7 @@ export function TablaNegocio({ rows }: Props) {
                       style={{ color: sem.color, backgroundColor: sem.bg }}
                     >
                       <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: sem.color }} />
-                      {row.ratioConv.toFixed(0)}%
+                      {(100 - row.ratioConv).toFixed(0)}%
                     </span>
                   </td>
                   <td className="px-3 py-2.5 text-right text-gray-500">{fmtUSD(row.ingShopify)}</td>
@@ -83,15 +83,19 @@ export function TablaNegocio({ rows }: Props) {
           </tbody>
         </table>
       </div>
-      {/* Leyenda semáforo */}
+      {/* Leyenda semáforo — umbrales expresados en % compras perdidas (inverso del ratio de conversión) */}
       <div className="flex items-center gap-4 text-[11px] text-muted-foreground px-1">
-        <span className="font-medium text-gray-400">Semáforo conv.:</span>
-        {(["verde", "amarillo", "rojo"] as SemaforoLevel[]).map(l => (
-          <span key={l} className="flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: SEMAFORO[l].color }} />
-            {SEMAFORO[l].label} {l === "verde" ? `(≥${thresholds[1].toFixed(0)}%)` : l === "amarillo" ? `(${thresholds[0].toFixed(0)}–${thresholds[1].toFixed(0)}%)` : `(<${thresholds[0].toFixed(0)}%)`}
-          </span>
-        ))}
+        <span className="font-medium text-gray-400">Semáforo compras perdidas:</span>
+        {(["verde", "amarillo", "rojo"] as SemaforoLevel[]).map(l => {
+          const pBajo = 100 - thresholds[1]
+          const pAlto = 100 - thresholds[0]
+          return (
+            <span key={l} className="flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: SEMAFORO[l].color }} />
+              {SEMAFORO[l].label} {l === "verde" ? `(≤${pBajo.toFixed(0)}%)` : l === "amarillo" ? `(${pBajo.toFixed(0)}–${pAlto.toFixed(0)}%)` : `(>${pAlto.toFixed(0)}%)`}
+            </span>
+          )
+        })}
       </div>
     </div>
   )

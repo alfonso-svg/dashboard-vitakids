@@ -148,7 +148,7 @@ export default function DashboardPage() {
       fetchPublicCsv()
     }
 
-    fetch('/Vita%20Kids%20data/Vita%20Kids%20-%20Claude%20-%20Ventas%20Negocio.csv')
+    fetch('/Vita%20Kids%20data/MetaNumbers%20VitaKids%20-%20Tabla%20Ventas%202026%20Looker.csv')
       .then(r => r.text())
       .then(text => {
         const rows = parseTablaNegocio(text)
