@@ -26,6 +26,9 @@ export type CampaignInsight = {
   pagos: number
   purchases: number
   cpa: number | null
+  // Cuando la campaña no optimiza a compra (ej. tráfico/awareness), cpa pasa a ser
+  // costo por clic/visita en vez de costo por compra — se muestra en gris, sin semáforo.
+  cpaAlt?: boolean
   roas: number | null
   valorCompras: number | null
 }

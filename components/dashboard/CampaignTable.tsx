@@ -16,6 +16,7 @@ type SortKey = "name" | "spend" | "impressions" | "ctr" | "visitas" | "carritos"
 type SortDir = "asc" | "desc"
 
 const usd = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2 })
+const usdAlt = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 4, maximumFractionDigits: 4 })
 const pct = (n: number) => `${n.toFixed(2)}%`
 const num = (n: number) => n.toLocaleString("en-US")
 
@@ -149,7 +150,14 @@ export function CampaignTable({ campaigns, loading }: CampaignTableProps) {
                     {c.purchases > 0 ? num(c.purchases) : <span className="text-muted-foreground font-normal">—</span>}
                   </TableCell>
                   <TableCell className="text-right px-2">
-                    {semaforo ? (
+                    {c.cpaAlt && c.cpa !== null ? (
+                      <span className="inline-flex flex-col items-end gap-0.5">
+                        <span className="inline-block px-2 py-0.5 rounded font-mono text-sm font-semibold text-gray-500 bg-gray-100">
+                          {usdAlt.format(c.cpa)}
+                        </span>
+                        <span className="text-[10px] leading-none text-muted-foreground">por visita</span>
+                      </span>
+                    ) : semaforo ? (
                       <span
                         className="inline-block px-2 py-0.5 rounded font-mono text-sm font-semibold"
                         style={{ color: semaforo.color, backgroundColor: semaforo.bg }}

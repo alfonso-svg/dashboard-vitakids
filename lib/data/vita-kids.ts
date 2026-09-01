@@ -235,7 +235,10 @@ export const campaigns: CampaignInsight[] = [
     carritos:          40,
     pagos:              6,
     purchases:          3,
-    cpa:           10.35,
+    // Campaña de tráfico (visitas al perfil), no de conversión — el CPA se reemplaza por
+    // costo por visita (spend / clicks) y se muestra en gris (sin semáforo).
+    cpa:            0.0129,
+    cpaAlt:          true,
     roas:            5.17,
     valorCompras:  160.33,
   },
