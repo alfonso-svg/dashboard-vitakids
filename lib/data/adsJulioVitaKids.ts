@@ -10,6 +10,7 @@ export type AdResultVK = {
   compras: number
   valor:   number
   roas:    number
+  nuevo?:  boolean // pieza recién lanzada: se muestra con badge "Nuevo"
 }
 
 export const adsJulioVK: AdResultVK[] = [

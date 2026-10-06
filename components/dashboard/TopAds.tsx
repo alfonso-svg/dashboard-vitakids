@@ -1,5 +1,6 @@
 "use client"
 
+import { Badge } from "@/components/ui/badge"
 import type { AdResultVK } from "@/lib/data/adsJulioVitaKids"
 
 const fmtUSD = (n: number) =>
@@ -33,6 +34,9 @@ export function TopAds({ ads }: { ads: AdResultVK[] }) {
           />
 
           <div className="p-3 flex flex-col gap-2.5 border-t border-gray-50">
+            {ad.nuevo && (
+              <Badge className="bg-[#8B5CF6] text-white text-[10px] uppercase tracking-wide">Nuevo</Badge>
+            )}
             <p className="text-[11px] font-semibold text-gray-700 leading-tight line-clamp-2">
               {ad.name}
             </p>
