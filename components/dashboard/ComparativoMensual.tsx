@@ -21,6 +21,7 @@ type Metrica = {
 
 const METRICAS: Metrica[] = [
   { label: "Inversión",         valor: r => r.spend,             formato: fmtUSD },
+  { label: "Visitas",           valor: r => r.visitas,           formato: n => n.toLocaleString("en-US") },
   { label: "Compras",           valor: r => r.purchases,         formato: n => n.toLocaleString("en-US") },
   { label: "CPA",               valor: r => r.cpa,               formato: fmtUSD, mejorSiBaja: true },
   { label: "Valor de compras",  valor: r => r.valorConversiones, formato: fmtUSD },

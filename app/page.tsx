@@ -23,7 +23,6 @@ import { aggregateCsvRows, csvDateRange, getAccountMonthlyTotals, mesFromISO, pa
 import { parseTablaNegocio, type TablaNegocioRow } from "@/lib/data/tablaNegocioParser"
 import { TopAds } from "@/components/dashboard/TopAds"
 import { TablaNegocio } from "@/components/dashboard/TablaNegocio"
-import { ComprasRoasChart } from "@/components/charts/ComprasRoasChart"
 import { CarritosComprasChart } from "@/components/charts/CarritosComprasChart"
 import { ConversionWebChart } from "@/components/charts/ConversionWebChart"
 import { adsOctubreVK } from "@/lib/data/adsOctubreVitaKids"
@@ -617,16 +616,6 @@ export default function DashboardPage() {
             Histórico mensual
           </p>
           <div className="flex flex-col gap-4">
-            <Card className="border-0 shadow-sm">
-              <CardHeader className="pb-1 pt-4 px-5">
-                <CardTitle className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                  Compras & ROAS
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="px-5 pb-4 pt-0">
-                <ComprasRoasChart data={monthlyHistory} />
-              </CardContent>
-            </Card>
             <Card className="border-0 shadow-sm">
               <CardHeader className="pb-1 pt-4 px-5">
                 <CardTitle className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
