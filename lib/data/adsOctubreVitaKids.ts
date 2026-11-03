@@ -3,7 +3,6 @@
 // Ads con mismo nombre corriendo en varias campañas se consolidan (spend/compras/valor sumados, ctr ponderado por impresiones).
 // "Ad 1 - Catálogo" (Tráfico Frío/Caliente) se suma a "Ad 1 - Catálogo - All Products".
 // "Ad 18 · Catálogo Niñas" sigue registrado en Meta como "Ad 14 - Catálogo Niñas".
-// Ad 23 (All Products V2) y Ad 15 (Carrusel Niña) todavía no tienen imagen en public/VitaKids Ads.
 // Fuera del top 6: Ad 21 Stock Sano ($55.61, 5 compras), Ad 16 Carrusel Niño ($38.71, 1),
 // Ad 22 Catálogo Niños ($36.42, 9 compras, $180.66, ROAS 4.96), Ad 20 Aike ($13.72, 1), Ad 8 ($2.02, 0).
 
@@ -31,7 +30,7 @@ export const adsOctubreVK: AdResultVK[] = [
   },
   {
     name:    "Ad 23 · All Products V2",
-    image:   "",
+    image:   "/VitaKids Ads/Ad 23 - Catálogo - All Products.png",
     spend:   131.87,
     ctr:       2.36,
     compras:     15,
@@ -50,7 +49,7 @@ export const adsOctubreVK: AdResultVK[] = [
   },
   {
     name:    "Ad 15 · Carrusel · Niña",
-    image:   "",
+    image:   "/VitaKids Ads/AD 15 - Carrusel Niñas.png",
     spend:   114.46,
     ctr:       1.25,
     compras:     11,
