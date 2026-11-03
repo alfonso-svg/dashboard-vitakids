@@ -42,3 +42,6 @@ next-env.d.ts
 
 .vercel
 .env*
+
+# Fuentes crudas del cliente: no versionar ni publicar
+public/Vita Kids data/*.xlsx

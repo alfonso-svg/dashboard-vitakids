@@ -14,7 +14,11 @@ import { ConversionsChart } from "@/components/charts/ConversionsChart"
 import { DateRangePicker, type DateRangeValue } from "@/components/dashboard/DateRangePicker"
 import { ExportButton } from "@/components/dashboard/ExportButton"
 import { CsvUpload, CSV_STORAGE_KEY } from "@/components/dashboard/CsvUpload"
-import { dailyData, campaigns as staticCampaigns } from "@/lib/data/vita-kids"
+import { dailyData, campaigns as staticCampaigns, FUNNEL_MARKERS, OCTUBRE_PERIODOS } from "@/lib/data/vita-kids"
+import { enRango, resumir, sumar } from "@/lib/data/funnelMetrics"
+import { FunnelRateChart } from "@/components/charts/FunnelRateChart"
+import { OctubrePeriodos } from "@/components/dashboard/OctubrePeriodos"
+import { ComparativoMensual } from "@/components/dashboard/ComparativoMensual"
 import { aggregateCsvRows, csvDateRange, getAccountMonthlyTotals, mesFromISO, parseCsvData, type CsvMonthRow, type MonthlyAccountTotal } from "@/lib/data/csvParser"
 import { parseTablaNegocio, type TablaNegocioRow } from "@/lib/data/tablaNegocioParser"
 import { TopAds } from "@/components/dashboard/TopAds"
@@ -22,7 +26,7 @@ import { TablaNegocio } from "@/components/dashboard/TablaNegocio"
 import { ComprasRoasChart } from "@/components/charts/ComprasRoasChart"
 import { CarritosComprasChart } from "@/components/charts/CarritosComprasChart"
 import { ConversionWebChart } from "@/components/charts/ConversionWebChart"
-import { adsSeptiembreVK } from "@/lib/data/adsSeptiembreVitaKids"
+import { adsOctubreVK } from "@/lib/data/adsOctubreVitaKids"
 import type { DailyInsight } from "@/lib/meta/types"
 
 // ── Formatters ───────────────────────────────────────────────────────────────
@@ -114,6 +118,13 @@ function computeHybridMetrics(
   if (!spend && !purchases) return null
   return { spend, impressions, ctr, visitas, carritos, pagos, purchases, roas, valorConversiones }
 }
+
+// ── Diagnóstico del embudo ───────────────────────────────────────────────────
+// Ventana fija sep–oct: septiembre es la línea base contra la que se lee octubre.
+const DIAG_FROM = "2026-09-01"
+const DIAG_TO   = "2026-10-31"
+const diagData  = enRango(dailyData, DIAG_FROM, DIAG_TO)
+const baseSep   = resumir(sumar(enRango(dailyData, "2026-09-01", "2026-09-30")))
 
 // ── Página ───────────────────────────────────────────────────────────────────
 export default function DashboardPage() {
@@ -502,6 +513,74 @@ export default function DashboardPage() {
           </div>
         )}
 
+        {/* Comparativo mensual */}
+        <Card className="border-0 shadow-sm">
+          <CardHeader className="pb-1 pt-4 px-5">
+            <CardTitle className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+              Comparativo mensual
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="px-5 pb-4 pt-0">
+            <ComparativoMensual meses={monthlyHistory} />
+          </CardContent>
+        </Card>
+
+        {/* Diagnóstico del embudo */}
+        <Card className="border-0 shadow-sm">
+          <CardHeader className="pb-1 pt-4 px-5">
+            <CardTitle className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+              Diagnóstico del embudo · 1 sep – 31 oct
+            </CardTitle>
+            <p className="text-xs text-muted-foreground mt-1">
+              La tasa de carrito refleja el surtido del catálogo; la tasa de checkout a compra refleja el funcionamiento del pago.
+            </p>
+          </CardHeader>
+          <CardContent className="px-5 pb-4 pt-2 space-y-5">
+            <div>
+              <p className="text-[11px] font-semibold text-gray-700 mb-1">
+                Visita a carrito <span className="font-normal text-muted-foreground">· add to cart ÷ landing page views · catálogo</span>
+              </p>
+              <FunnelRateChart
+                data={diagData}
+                numerador="carritos"
+                denominador="visitas"
+                promedioReferencia={baseSep.visitaCarrito}
+                etiquetaReferencia="Prom. sep"
+                markers={FUNNEL_MARKERS}
+                color="#8B5CF6"
+                nombre="Visita a carrito"
+              />
+            </div>
+            <div>
+              <p className="text-[11px] font-semibold text-gray-700 mb-1">
+                Checkout a compra <span className="font-normal text-muted-foreground">· compras ÷ pagos iniciados · checkout</span>
+              </p>
+              <FunnelRateChart
+                data={diagData}
+                numerador="purchases"
+                denominador="pagos"
+                promedioReferencia={baseSep.checkoutCompra}
+                etiquetaReferencia="Prom. sep"
+                markers={FUNNEL_MARKERS}
+                color="#18181B"
+                nombre="Checkout a compra"
+              />
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Octubre por períodos */}
+        <Card className="border-0 shadow-sm">
+          <CardHeader className="pb-1 pt-4 px-5">
+            <CardTitle className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+              Octubre por períodos
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="px-5 pb-4 pt-0">
+            <OctubrePeriodos data={dailyData} periodos={OCTUBRE_PERIODOS} />
+          </CardContent>
+        </Card>
+
         {/* Tabla de campañas */}
         <Card className="border-0 shadow-sm">
           <CardHeader className="pb-1 pt-4 px-5">
@@ -520,12 +599,12 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
 
-        {/* Mejores ads de septiembre */}
+        {/* Mejores ads de octubre */}
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-3">
-            Mejores ads · Septiembre 2026
+            Mejores ads · Octubre 2026
           </p>
-          <TopAds ads={adsSeptiembreVK} />
+          <TopAds ads={adsOctubreVK} />
         </div>
 
         {/* Histórico mensual */}

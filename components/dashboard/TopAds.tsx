@@ -1,5 +1,6 @@
 "use client"
 
+import { Image as ImageIcon } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import type { AdResultVK } from "@/lib/data/adsJulioVitaKids"
 
@@ -26,12 +27,19 @@ export function TopAds({ ads }: { ads: AdResultVK[] }) {
           key={ad.name}
           className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden flex flex-col"
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={ad.image}
-            alt={ad.name}
-            className="w-full h-auto"
-          />
+          {ad.image ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={ad.image}
+              alt={ad.name}
+              className="w-full h-auto"
+            />
+          ) : (
+            <div className="w-full aspect-square bg-gray-50 flex flex-col items-center justify-center gap-1 text-gray-300">
+              <ImageIcon size={24} />
+              <span className="text-[10px] text-gray-400">Sin imagen</span>
+            </div>
+          )}
 
           <div className="p-3 flex flex-col gap-2.5 border-t border-gray-50">
             {ad.nuevo && (
