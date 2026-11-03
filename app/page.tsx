@@ -513,18 +513,6 @@ export default function DashboardPage() {
           </div>
         )}
 
-        {/* Comparativo mensual */}
-        <Card className="border-0 shadow-sm">
-          <CardHeader className="pb-1 pt-4 px-5">
-            <CardTitle className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-              Comparativo mensual
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="px-5 pb-4 pt-0">
-            <ComparativoMensual meses={monthlyHistory} />
-          </CardContent>
-        </Card>
-
         {/* Diagnóstico del embudo */}
         <Card className="border-0 shadow-sm">
           <CardHeader className="pb-1 pt-4 px-5">
@@ -532,7 +520,7 @@ export default function DashboardPage() {
               Diagnóstico del embudo · 1 sep – 31 oct
             </CardTitle>
             <p className="text-xs text-muted-foreground mt-1">
-              La tasa de carrito refleja el surtido del catálogo; la tasa de checkout a compra refleja el funcionamiento del pago.
+              La tasa de carrito refleja el surtido del catálogo; el CPA muestra cuánto costó cada compra en el mismo período.
             </p>
           </CardHeader>
           <CardContent className="px-5 pb-4 pt-2 space-y-5">
@@ -542,8 +530,10 @@ export default function DashboardPage() {
               </p>
               <FunnelRateChart
                 data={diagData}
-                numerador="carritos"
-                denominador="visitas"
+                valor={d => (d.visitas > 0 ? (d.carritos / d.visitas) * 100 : null)}
+                detalle={d => `${d.carritos} carritos de ${d.visitas} visitas`}
+                formato={n => `${n.toFixed(1)}%`}
+                formatoEje={n => `${n}%`}
                 promedioReferencia={baseSep.visitaCarrito}
                 etiquetaReferencia="Prom. sep"
                 markers={FUNNEL_MARKERS}
@@ -553,17 +543,19 @@ export default function DashboardPage() {
             </div>
             <div>
               <p className="text-[11px] font-semibold text-gray-700 mb-1">
-                Checkout a compra <span className="font-normal text-muted-foreground">· compras ÷ pagos iniciados · checkout</span>
+                CPA diario <span className="font-normal text-muted-foreground">· inversión ÷ compras · días sin compras quedan sin punto</span>
               </p>
               <FunnelRateChart
                 data={diagData}
-                numerador="purchases"
-                denominador="pagos"
-                promedioReferencia={baseSep.checkoutCompra}
+                valor={d => (d.purchases > 0 ? d.spend / d.purchases : null)}
+                detalle={d => `${fmtUSD(d.spend)} ÷ ${d.purchases} compras`}
+                formato={fmtUSD}
+                formatoEje={n => `$${n}`}
+                promedioReferencia={baseSep.cpa}
                 etiquetaReferencia="Prom. sep"
                 markers={FUNNEL_MARKERS}
-                color="#18181B"
-                nombre="Checkout a compra"
+                color="#0ea5e9"
+                nombre="CPA"
               />
             </div>
           </CardContent>
@@ -578,6 +570,18 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent className="px-5 pb-4 pt-0">
             <OctubrePeriodos data={dailyData} periodos={OCTUBRE_PERIODOS} />
+          </CardContent>
+        </Card>
+
+        {/* Comparativo mensual */}
+        <Card className="border-0 shadow-sm">
+          <CardHeader className="pb-1 pt-4 px-5">
+            <CardTitle className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+              Comparativo mensual
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="px-5 pb-4 pt-0">
+            <ComparativoMensual meses={monthlyHistory} />
           </CardContent>
         </Card>
 
