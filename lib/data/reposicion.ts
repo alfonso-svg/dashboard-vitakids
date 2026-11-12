@@ -1,21 +1,25 @@
-// Modelos nuevos en el catálogo (7 nov 2026): 5 días vs 5 días.
+// Nueva colección en el catálogo (7 nov 2026): 5 días vs 5 días.
 // Campañas de venta (Advantage+ y Tráfico Frío); excluye Visitas al Perfil.
 // Fuente: Meta API vía MCP, cuenta 298292486622442 (consultado 12 nov 2026).
 // 2–6 nov: $119.63 · 35 compras · $690.40 valor · 1,674 visitas · 254 carritos · 77 pagos
 // 7–11 nov: $115.79 · 39 compras · $910.86 valor · 2,850 visitas · 344 carritos · 136 pagos
 // Octubre (cuenta completa, dailyData): $1,153.42 · 115 compras · CPA $10.03 · ROAS 2.50x
-export type ReposicionRow = { metrica: string; antes: string; despues: string; var: string; alerta?: boolean }
+// tono: "mejora" = verde, "empeora" = rojo, sin tono = neutro. destacada = fila resaltada.
+export type ReposicionRow = {
+  metrica: string; antes: string; despues: string; var: string
+  tono?: "mejora" | "empeora"; destacada?: boolean
+}
 
 export const REPOSICION: ReposicionRow[] = [
   { metrica: "Inversión",        antes: "$119.63", despues: "$115.79", var: "−3.2%" },
-  { metrica: "Compras",          antes: "35",      despues: "39",      var: "+11.4%" },
-  { metrica: "CPA",              antes: "$3.42",   despues: "$2.97",   var: "−13.1%", alerta: true },
-  { metrica: "ROAS",             antes: "5.77x",   despues: "7.87x",   var: "+36.3%", alerta: true },
-  { metrica: "Valor de compras", antes: "$690.40", despues: "$910.86", var: "+31.9%" },
-  { metrica: "Visitas",          antes: "1,674",   despues: "2,850",   var: "+70.3%" },
-  { metrica: "Carritos",         antes: "254",     despues: "344",     var: "+35.4%" },
-  { metrica: "Pagos iniciados",  antes: "77",      despues: "136",     var: "+76.6%" },
-  { metrica: "Visita → carrito", antes: "15.2%",   despues: "12.1%",   var: "−20.4%" },
+  { metrica: "Compras",          antes: "35",      despues: "39",      var: "+11.4%", tono: "mejora" },
+  { metrica: "CPA",              antes: "$3.42",   despues: "$2.97",   var: "−13.1%", tono: "mejora", destacada: true },
+  { metrica: "ROAS",             antes: "5.77x",   despues: "7.87x",   var: "+36.3%", tono: "mejora", destacada: true },
+  { metrica: "Valor de compras", antes: "$690.40", despues: "$910.86", var: "+31.9%", tono: "mejora" },
+  { metrica: "Visitas",          antes: "1,674",   despues: "2,850",   var: "+70.3%", tono: "mejora" },
+  { metrica: "Carritos",         antes: "254",     despues: "344",     var: "+35.4%", tono: "mejora" },
+  { metrica: "Pagos iniciados",  antes: "77",      despues: "136",     var: "+76.6%", tono: "mejora" },
+  { metrica: "Visita → carrito", antes: "15.2%",   despues: "12.1%",   var: "−20.4%", tono: "empeora" },
 ]
 
 export const REPOSICION_TITULAR = "Los modelos nuevos subieron el ROAS 36% con la misma inversión"

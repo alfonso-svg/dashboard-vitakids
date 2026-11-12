@@ -592,7 +592,7 @@ export default function DashboardPage() {
         <Card className="border-0 shadow-sm">
           <CardHeader className="pb-1 pt-4 px-5">
             <CardTitle className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-              Noviembre · Modelos nuevos
+              Noviembre - Nueva colección
             </CardTitle>
           </CardHeader>
           <CardContent className="px-5 pb-4 pt-0">

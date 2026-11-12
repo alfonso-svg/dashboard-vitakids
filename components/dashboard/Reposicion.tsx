@@ -3,7 +3,13 @@
 import {
   REPOSICION, REPOSICION_TITULAR, REPOSICION_BAJADA,
   REPOSICION_DESTACADO, REPOSICION_DESTACADO_DETALLE, REPOSICION_METODO,
+  type ReposicionRow,
 } from "@/lib/data/reposicion"
+
+const colorVar = (row: ReposicionRow) =>
+  row.tono === "mejora" ? "font-bold text-green-700"
+  : row.tono === "empeora" ? "font-bold text-red-700"
+  : "text-gray-500"
 
 export function Reposicion() {
   return (
@@ -25,17 +31,17 @@ export function Reposicion() {
           </thead>
           <tbody>
             {REPOSICION.map(row => (
-              <tr key={row.metrica} className={row.alerta ? "bg-red-50" : "border-b border-gray-50"}>
-                <td className={`px-3 py-2.5 whitespace-nowrap ${row.alerta ? "font-bold text-red-700" : "font-medium text-gray-700"}`}>
+              <tr key={row.metrica} className={row.destacada ? "bg-green-50" : "border-b border-gray-50"}>
+                <td className={`px-3 py-2.5 whitespace-nowrap ${row.destacada ? "font-bold text-green-800" : "font-medium text-gray-700"}`}>
                   {row.metrica}
                 </td>
-                <td className={`px-3 py-2.5 text-right tabular-nums ${row.alerta ? "text-red-700" : "text-gray-500"}`}>
+                <td className="px-3 py-2.5 text-right tabular-nums text-gray-500">
                   {row.antes}
                 </td>
-                <td className={`px-3 py-2.5 text-right tabular-nums ${row.alerta ? "font-bold text-red-700" : "font-medium text-gray-700"}`}>
+                <td className={`px-3 py-2.5 text-right tabular-nums ${row.destacada ? "font-bold text-green-800" : "font-medium text-gray-700"}`}>
                   {row.despues}
                 </td>
-                <td className={`px-3 py-2.5 text-right tabular-nums ${row.alerta ? "font-bold text-red-700" : "text-gray-500"}`}>
+                <td className={`px-3 py-2.5 text-right tabular-nums ${colorVar(row)}`}>
                   {row.var}
                 </td>
               </tr>
@@ -46,9 +52,9 @@ export function Reposicion() {
 
       <p className="text-sm text-gray-600 leading-relaxed">{REPOSICION_BAJADA}</p>
 
-      <div className="rounded-md bg-red-50 px-3 py-2.5">
+      <div className="rounded-md bg-green-50 px-3 py-2.5">
         <p className="text-sm leading-relaxed text-gray-700">
-          <span className="font-bold text-red-700">{REPOSICION_DESTACADO}</span>{" "}
+          <span className="font-bold text-green-800">{REPOSICION_DESTACADO}</span>{" "}
           {REPOSICION_DESTACADO_DETALLE}
         </p>
       </div>
