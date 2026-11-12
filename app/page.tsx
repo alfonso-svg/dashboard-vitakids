@@ -23,6 +23,7 @@ import { aggregateCsvRows, csvDateRange, getAccountMonthlyTotals, mesFromISO, pa
 import { parseTablaNegocio, type TablaNegocioRow } from "@/lib/data/tablaNegocioParser"
 import { TopAds } from "@/components/dashboard/TopAds"
 import { TablaNegocio } from "@/components/dashboard/TablaNegocio"
+import { Reposicion } from "@/components/dashboard/Reposicion"
 import { CarritosComprasChart } from "@/components/charts/CarritosComprasChart"
 import { ConversionWebChart } from "@/components/charts/ConversionWebChart"
 import { adsOctubreVK } from "@/lib/data/adsOctubreVitaKids"
@@ -581,6 +582,18 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent className="px-5 pb-4 pt-0">
             <ComparativoMensual meses={monthlyHistory} />
+          </CardContent>
+        </Card>
+
+        {/* Modelos nuevos · reposición 7 nov */}
+        <Card className="border-0 shadow-sm">
+          <CardHeader className="pb-1 pt-4 px-5">
+            <CardTitle className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+              Noviembre · Modelos nuevos
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="px-5 pb-4 pt-0">
+            <Reposicion />
           </CardContent>
         </Card>
 
