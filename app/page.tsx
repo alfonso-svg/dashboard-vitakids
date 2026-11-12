@@ -522,6 +522,9 @@ export default function DashboardPage() {
             <p className="text-xs text-muted-foreground mt-1">
               La tasa de carrito refleja el surtido del catálogo; el CPA muestra cuánto costó cada compra en el mismo período.
             </p>
+            <p className="text-xs text-muted-foreground mt-1">
+              Cuando se detectó el quiebre de catálogo a principios de octubre reportamos que solo tenían visibilidad 28 modelos de 132 que estaban disponibles. Se reportó el error de sincronización. Este incidente sumado al cambio en el checkout nos costó el peor mes del año.
+            </p>
           </CardHeader>
           <CardContent className="px-5 pb-4 pt-2 space-y-5">
             <div>
