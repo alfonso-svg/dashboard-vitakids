@@ -141,7 +141,7 @@ export function ComparativoMensual({ meses }: ComparativoMensualProps) {
         </tbody>
       </table>
       <p className="text-[11px] text-muted-foreground px-3 py-2 border-t border-gray-100">
-        Elegí los meses en el encabezado de cada columna. Verde = mejora, rojo = empeora (en CPA, CPC y CPM bajar es mejora).
+        Elige los meses en el encabezado de cada columna. Verde = mejora, rojo = empeora (en CPA, CPC y CPM bajar es mejora).
       </p>
     </div>
   )
